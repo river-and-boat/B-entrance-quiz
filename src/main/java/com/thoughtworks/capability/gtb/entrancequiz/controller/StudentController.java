@@ -24,7 +24,13 @@ public class StudentController {
     }
 
     @GetMapping("/gtb/students")
-    public ResponseEntity<List<String>> getStudents() {
+    public ResponseEntity<List<Student>> getStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());
+    }
+
+    @GetMapping("/gtb/groups/random")
+    public ResponseEntity<Map<String, List<Student>>> RandomGroups() {
+        return ResponseEntity
+                .ok(studentService.groupAllStudents());
     }
 }
