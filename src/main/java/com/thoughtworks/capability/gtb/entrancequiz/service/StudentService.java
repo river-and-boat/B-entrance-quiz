@@ -49,6 +49,12 @@ public class StudentService {
         return studentRepository.getGroups();
     }
 
+    public Student addStudent(String studentName) {
+        int studentCount = studentRepository.getStudentCount();
+        Student student = new Student(studentCount + 1, studentName);
+        return studentRepository.saveStudent(student);
+    }
+
     private void randomGroupStudents(List<Student> students,
                                      Integer number, String groupName) {
         Random random = new Random();
@@ -56,7 +62,7 @@ public class StudentService {
             int maxNumber = students.size();
             int randomIndex = random.nextInt(maxNumber);
             Student randomStudent = students.get(randomIndex);
-            Student student = studentRepository.AddToTeam(groupName, randomStudent);
+            Student student = studentRepository.addToTeam(groupName, randomStudent);
             if (student != null) {
                 n++;
                 students.remove(randomIndex);

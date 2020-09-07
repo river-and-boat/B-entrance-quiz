@@ -87,11 +87,24 @@ public class StudentRepository {
         });
     }
 
-    public Student AddToTeam(String teamName, Student student) {
+    public Student addToTeam(String teamName, Student student) {
         if (groups.containsKey(teamName)) {
             groups.get(teamName).add(student);
             return student;
         }
         return null;
+    }
+
+    public int getStudentCount() {
+        return students.size();
+    }
+
+    public Student saveStudent(Student student) {
+        try {
+            students.add(student);
+            return student;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

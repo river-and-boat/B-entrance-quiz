@@ -2,8 +2,11 @@ package com.thoughtworks.capability.gtb.entrancequiz.controller;
 
 import com.thoughtworks.capability.gtb.entrancequiz.entity.Student;
 import com.thoughtworks.capability.gtb.entrancequiz.service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,8 +32,17 @@ public class StudentController {
     }
 
     @GetMapping("/gtb/groups/random")
-    public ResponseEntity<Map<String, List<Student>>> RandomGroups() {
+    public ResponseEntity<Map<String, List<Student>>> randomGroups() {
         return ResponseEntity
                 .ok(studentService.groupAllStudents());
+    }
+
+    @PostMapping("/gtb/student")
+    public ResponseEntity addStudent(@RequestBody String studentName) {
+        Student student = studentService.addStudent(studentName);
+        if (student != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }
