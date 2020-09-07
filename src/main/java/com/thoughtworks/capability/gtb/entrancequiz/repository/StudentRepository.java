@@ -107,4 +107,14 @@ public class StudentRepository {
             return null;
         }
     }
+
+    public String updateGroupName(String oldName, String newName) {
+        if (groups.containsKey(newName)) {
+            return null;
+        }
+        List<Student> students = groups.get(oldName);
+        groups.put(newName, students);
+        groups.remove(oldName);
+        return newName;
+    }
 }

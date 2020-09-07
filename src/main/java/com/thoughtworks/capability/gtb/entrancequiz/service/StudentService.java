@@ -55,6 +55,10 @@ public class StudentService {
         return studentRepository.saveStudent(student);
     }
 
+    public String updateGroupName(String oldName, String newName) {
+        return studentRepository.updateGroupName(oldName, newName);
+    }
+
     private void randomGroupStudents(List<Student> students,
                                      Integer number, String groupName) {
         Random random = new Random();
